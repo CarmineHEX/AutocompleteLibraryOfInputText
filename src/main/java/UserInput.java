@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class UserInput {
     String filter;
-    String search;
+    String request;
 
     public String enterString()
     {
