@@ -1,23 +1,36 @@
 import java.util.*;
 
 public class Airports {
-    TreeMap<String,Long> airportsMap = new TreeMap<>();
-    String[] airportData;
+    public TreeMap<String,Long> airportsMap = new TreeMap<>();
 
-    void outputAirports(Map<String,Long> map){
-        for (Map.Entry<String,Long> entry: map.entrySet()) {
-            System.out.println(entry.getKey() + ":" + entry.getValue());
+    //output found airport
+    public Integer outputAirports(String userRequest,String userFilter, Filter filter, File file){
+        int numberFoundAirport = 0;
+        List<String> nameAirports =searchAirport(userRequest);
+        for (String nameAirport : nameAirports) {
+            String[] airport = getSplitRowAirport(file.getRowFromFile(airportsMap, nameAirport));
+            if (!userFilter.isEmpty()) {
+                if (filter.isSuitableAirport(userFilter, getSplitRowAirport(file.getRowFromFile(airportsMap, nameAirport)))) {
+                    numberFoundAirport++;
+                    System.out.println(airport[1] + Arrays.toString(airport));
+                }
+            }
+            else
+            {
+                numberFoundAirport++;
+                System.out.println(airport[1] + Arrays.toString(airport));
+            }
         }
+        return numberFoundAirport;
     }
-    void outputAirportData (String[] ad){
-        for(String a: ad){
-            System.out.print(a);
-        }
-    }
-    void getSplitRowAirport(String row){
+    // get massive elements row taken from a file
+    private String[] getSplitRowAirport(String row){
+        String[] airportData;
         airportData= row.split(",");
+        return airportData;
     }
-    List<String> searchAirport( String request) {
+     // search airport at the beginning of the entered line in treemap by key
+    private List<String> searchAirport( String request) {
         List<String> result = new ArrayList<>();
 
         if ( airportsMap == null || airportsMap.isEmpty() || request == null || request.length() == 0) {
@@ -31,7 +44,7 @@ public class Airports {
         }
 
         for (String key : airportsMap.keySet()) {
-            if (key.startsWith(request) && key.compareTo(firstKey) >= 0) {
+            if (key.startsWith(request)) {
                 result.add(key);
             }
         }
