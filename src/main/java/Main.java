@@ -9,11 +9,10 @@ public class Main {
         file.readNameAirports(airports.airportsMap);
 
         while(true) {
-            // (column[1]<10&(column[3]<>'Godthaab'&(column[4]='Greenland'||column[7]>80)))&(Column[11]='E'||column[12]='America/Godthab')
-            System.out.println("Enter filter for columns 3-14 (leave empty for no filter): ");
+            System.out.println("Введите фильтр (пустая строка будет означать поиск без фильтра): ");
             userInput.filter = userInput.enterFilter();
             if (!userInput.filter.equals("!return")) {
-                System.out.println("Enter start of airport name to search for: ");
+                System.out.println("Введите начало имени аэропорта: ");
                 userInput.request = userInput.enterString();
                 long start = System.currentTimeMillis();
                 int numberFoundAirport = airports.outputAirports(userInput.request, userInput.filter, filter, file);
