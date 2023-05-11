@@ -1,7 +1,10 @@
 ## Локальный запуск проекта
 
 ````bash
-java -Xmx7m -jar AutocompleteLibraryOfInputText-1.0-SNAPSHOT.jar
+ mvn clean package  
+````
+````bash
+java -Xmx7m -jar target/AutocompleteLibraryOfInputText-1.0-SNAPSHOT.jar
 ````
 
 ## Описание проекта
